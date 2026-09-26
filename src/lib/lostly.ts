@@ -33,7 +33,7 @@ export type ReportRow = {
 
 export type FindPoint = { id: string; name: string; kind: string; map_x: number; map_y: number; items_in_storage: number; hours: string };
 
-export type MyItem = { id: string; kind: "lost" | "found"; title: string; category: string; location: string; date: string; photo?: string; status: string; matches?: number };
+export type MyItem = { id: string; kind: "lost" | "found"; title: string; category: string; location: string; date: string; photo?: string | undefined; status: string; matches?: number };
 
 const KEY = "lostly.myItems";
 export function getMyItems(): MyItem[] {

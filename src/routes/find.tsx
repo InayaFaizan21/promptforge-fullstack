@@ -63,7 +63,7 @@ function FindPage() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const err = validateItem(v);
-    if (err) return toast.error(err);
+    if (err) { toast.error(err); return; }
     setStage("searching"); setStep(0);
     try {
       const occurred = new Date(v.occurred_at).toISOString();

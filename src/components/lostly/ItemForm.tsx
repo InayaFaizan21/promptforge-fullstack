@@ -8,7 +8,7 @@ import { CATEGORIES, compressImage } from "@/lib/lostly";
 import { CityMap } from "./CityMap";
 
 export type ItemFormValue = {
-  photo?: string;
+  photo?: string | undefined;
   category: string;
   title: string;
   description: string;
@@ -24,7 +24,7 @@ export function emptyItem(): ItemFormValue {
   return { category: "", title: "", description: "", location_name: "", map_x: null, map_y: null, occurred_at: local };
 }
 
-export function PhotoUpload({ value, onChange }: { value?: string; onChange: (v?: string) => void }) {
+export function PhotoUpload({ value, onChange }: { value?: string | undefined; onChange: (v?: string) => void }) {
   const ref = useRef<HTMLInputElement>(null);
   const camRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);

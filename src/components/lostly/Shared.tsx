@@ -47,7 +47,7 @@ export function ScanFrame({ children, scanning }: { children: React.ReactNode; s
   );
 }
 
-export function ItemThumb({ photo, category, className }: { photo?: string | null; category: string; className?: string }) {
+export function ItemThumb({ photo, category, className }: { photo?: string | null | undefined; category: string; className?: string | undefined }) {
   const Icon = categoryIcon(category);
   if (photo) return <img src={photo} alt={`${category} item`} className={cn("object-cover", className)} />;
   return (

@@ -38,7 +38,7 @@ function ReportPage() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const err = validateItem(v) || (!q.trim() || !a.trim() ? "Add a private verification question and answer." : "");
-    if (err) return toast.error(err);
+    if (err) { toast.error(err); return; }
     setStage("saving"); setStep(0);
     try {
       const occurred = new Date(v.occurred_at).toISOString();
