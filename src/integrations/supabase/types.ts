@@ -14,7 +14,116 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      find_points: {
+        Row: {
+          hours: string
+          id: string
+          items_in_storage: number
+          kind: string
+          map_x: number
+          map_y: number
+          name: string
+        }
+        Insert: {
+          hours?: string
+          id?: string
+          items_in_storage?: number
+          kind: string
+          map_x: number
+          map_y: number
+          name: string
+        }
+        Update: {
+          hours?: string
+          id?: string
+          items_in_storage?: number
+          kind?: string
+          map_x?: number
+          map_y?: number
+          name?: string
+        }
+        Relationships: []
+      }
+      report_secrets: {
+        Row: {
+          answer: string
+          report_id: string
+        }
+        Insert: {
+          answer: string
+          report_id: string
+        }
+        Update: {
+          answer?: string
+          report_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_secrets_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: true
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reports: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          fingerprint: Json
+          id: string
+          is_demo: boolean
+          kind: string
+          location_name: string
+          map_x: number
+          map_y: number
+          occurred_at: string
+          photo: string | null
+          safe_storage: string | null
+          status: string
+          title: string
+          verify_question: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string
+          fingerprint?: Json
+          id?: string
+          is_demo?: boolean
+          kind: string
+          location_name: string
+          map_x?: number
+          map_y?: number
+          occurred_at?: string
+          photo?: string | null
+          safe_storage?: string | null
+          status?: string
+          title: string
+          verify_question?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          fingerprint?: Json
+          id?: string
+          is_demo?: boolean
+          kind?: string
+          location_name?: string
+          map_x?: number
+          map_y?: number
+          occurred_at?: string
+          photo?: string | null
+          safe_storage?: string | null
+          status?: string
+          title?: string
+          verify_question?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
