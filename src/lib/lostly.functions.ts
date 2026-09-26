@@ -69,7 +69,7 @@ export const analyzeItem = createServerFn({ method: "POST" })
       })
       .parse(d),
   )
-  .handler(async ({ data }): Promise<{ fingerprint: Fingerprint; source: "ai" | "fallback"; note?: string }> => {
+  .handler(async ({ data }): Promise<{ fingerprint: Fingerprint; source: "ai" | "fallback"; note?: string | undefined }> => {
     const apiKey = process.env["LOVABLE_API_KEY"];
     if (!apiKey) return { fingerprint: heuristicFingerprint(data.category, data.description), source: "fallback" };
     const content: any[] = [
@@ -126,7 +126,7 @@ export const createReport = createServerFn({ method: "POST" })
     const { verify_answer, ...row } = data;
     const { data: inserted, error } = await supabaseAdmin
       .from("reports")
-      .insert({ ...row, verify_question: row.kind === "found" ? row.verify_question || null : null })
+      .insert({ ...row, photo: row.photo ?? null, safe_storage: row.safe_storage ?? null, fingerprint: row.fingerprint as any, verify_question: row.kind === "found" ? row.verify_question || null : null })
       .select("id")
       .single();
     if (error) throw new Error("Could not save the report. Please try again.");
