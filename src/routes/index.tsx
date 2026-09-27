@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, Camera, Check, MapPin, MessageSquare, Search, ShieldCheck, Sparkles, Star, Users, X, TrendingDown, TrendingUp, Building2, Crown, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScanFrame, useCountUp } from "@/components/lostly/Shared";
+import { ScanFrame, SignalsNearMe, useCountUp } from "@/components/lostly/Shared";
 import lostImg from "@/assets/backpack-lost.jpg";
 import foundImg from "@/assets/backpack-found.jpg";
 
@@ -117,6 +117,21 @@ function Home() {
       </section>
 
       <section className="border-y border-border/60 bg-surface/50">
+        <div className="mx-auto grid max-w-7xl items-start gap-10 px-6 py-20 lg:grid-cols-2">
+          <div>
+            <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">
+              <span className="relative flex h-2.5 w-2.5"><span className="absolute inset-0 rounded-full bg-primary animate-ping-soft" /><span className="relative rounded-full h-2.5 w-2.5 bg-primary" /></span>
+              Live signals near you
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold">Finding signals, as they happen.</h2>
+            <p className="mt-4 text-muted-foreground">Every lost and found report becomes a signal on the network. Watch what's moving in your neighborhood right now — a signal here might be your item.</p>
+            <Button asChild className="mt-6 bg-brand shadow-glow hover:opacity-90"><Link to="/map">Open the live map <ArrowRight /></Link></Button>
+          </div>
+          <SignalsNearMe />
+        </div>
+      </section>
+
+      <section className="border-b border-border/60 bg-surface/50">
         <div className="mx-auto max-w-7xl px-6 py-20">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
