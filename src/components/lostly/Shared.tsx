@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { Check, Loader2, ShieldCheck, Sparkles } from "lucide-react";
+import { Check, Loader2, MapPin, Radio, ShieldCheck, Sparkles } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
-import { categoryIcon } from "@/lib/lostly";
+import { categoryIcon, timeAgo, type ReportRow } from "@/lib/lostly";
 import type { MatchResult } from "@/lib/lostly.functions";
 
 export function useCountUp(target: number, ms = 1200) {
