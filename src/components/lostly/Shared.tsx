@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Check, Loader2, MapPin, Radio, ShieldCheck, Sparkles } from "lucide-react";
+import { Check, Loader2, MapPin, ShieldCheck, Sparkles } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";

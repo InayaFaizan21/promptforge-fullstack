@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, Camera, Check, MapPin, MessageSquare, Search, ShieldCheck, Sparkles, Star, Users, X, TrendingDown, TrendingUp, Building2, Crown, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScanFrame, useCountUp } from "@/components/lostly/Shared";
+import { ScanFrame, SignalsNearMe, useCountUp } from "@/components/lostly/Shared";
 import lostImg from "@/assets/backpack-lost.jpg";
 import foundImg from "@/assets/backpack-found.jpg";
 
