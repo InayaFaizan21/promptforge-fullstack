@@ -136,6 +136,54 @@ export function MatchCard({ m, onClaim, onDismiss }: { m: MatchResult; onClaim?:
   );
 }
 
+export function SignalsNearMe({ limit = 6, className }: { limit?: number; className?: string }) {
+  const { data } = useQuery({
+    queryKey: ["signals-near-me", limit],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("reports")
+        .select("id,kind,category,title,location_name,occurred_at,status,is_demo")
+        .order("created_at", { ascending: false })
+        .limit(limit);
+      if (error) throw error;
+      return data as Pick<ReportRow, "id" | "kind" | "category" | "title" | "location_name" | "occurred_at" | "status" | "is_demo">[];
+    },
+    refetchInterval: 30_000,
+  });
+  const signals = data ?? [];
+  return (
+    <div className={cn("space-y-2", className)}>
+      {signals.length === 0 && <p className="rounded-xl border border-dashed border-border p-4 text-sm text-muted-foreground">No signals yet — be the first to report.</p>}
+      {signals.map((s) => {
+        const Icon = categoryIcon(s.category);
+        return (
+          <Link
+            key={s.id}
+            to="/map"
+            className="group flex items-center gap-3 rounded-xl border border-border bg-card p-3 transition-colors hover:border-primary/50"
+          >
+            <span className="relative grid h-9 w-9 shrink-0 place-items-center">
+              <span className={cn("absolute inset-0 rounded-full animate-ping-soft", s.kind === "lost" ? "bg-lost/60" : "bg-success/60")} />
+              <span className={cn("relative grid h-9 w-9 place-items-center rounded-full", s.kind === "lost" ? "bg-lost/15 text-lost" : "bg-success/15 text-success")}>
+                <Icon className="h-4 w-4" />
+              </span>
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-sm font-medium">{s.title}</span>
+              <span className="flex items-center gap-1 truncate text-xs text-muted-foreground">
+                <MapPin className="h-3 w-3" />{s.location_name} · {timeAgo(s.occurred_at)}
+              </span>
+            </span>
+            <span className={cn("shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider", s.kind === "lost" ? "bg-lost/15 text-lost" : "bg-success/15 text-success")}>
+              {s.kind}
+            </span>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
 export function Celebration({ title, subtitle }: { title: string; subtitle: string }) {
   const pieces = Array.from({ length: 28 }, (_, i) => i);
   const colors = ["bg-primary", "bg-violet", "bg-warm", "bg-success"];
